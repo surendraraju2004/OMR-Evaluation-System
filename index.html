@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMR Evaluation System - Innomatics Research Labs</title>
+    <meta name="description" content="OMR Evaluation System - Innomatics Research Labs">
+    <link rel="stylesheet" href="style.css">
+    <!-- SheetJS for Excel export -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎯 OMR Evaluation System</h1>
+            <p>Automated scoring for placement readiness assessments - Innomatics Research Labs</p>
+        </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <h2 class="section-title">📤 Upload OMR Sheets</h2>
+                <form id="uploadForm" autocomplete="off" onsubmit="return false;">
+                    <div class="config-panel">
+                        <div class="form-group">
+                            <label for="examVersion">Exam Version</label>
+                            <select id="examVersion">
+                                <option value="A">Version A</option>
+                                <option value="B">Version B</option>
+                                <option value="C">Version C</option>
+                                <option value="D">Version D</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentId">Student ID (Optional)</label>
+                            <input type="text" id="studentId" placeholder="Enter student ID">
+                        </div>
+                    </div>
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📷</div>
+                        <div class="upload-text">
+                            Drag & drop OMR sheet images here<br>
+                            or click to select files
+                        </div>
+                        <button class="btn" type="button" onclick="document.getElementById('fileInput').click()">
+                            Select Images
+                        </button>
+                    </div>
+                    <input type="file" id="fileInput" class="file-input" multiple accept="image/*" />
+                    <div class="processing-status" id="processingStatus">
+                        🔄 Processing OMR sheets... Please wait
+                    </div>
+                    <div class="error-message" id="errorMessage"></div>
+                    <div class="success-message" id="successMessage"></div>
+                    <button class="btn" id="processBtn" type="button" onclick="processOMR()" disabled>
+                        🚀 Process OMR Sheets
+                    </button>
+                </form>
+            </section>
+            <!-- Results Section -->
+            <section class="results-section">
+                <h2 class="section-title">📊 Results</h2>
+                <div id="currentResults">
+                    <div style="text-align: center; color: #7f8c8d; padding: 40px;">
+                        Upload and process OMR sheets to see results here
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Dashboard -->
+        <section class="dashboard">
+            <h2 class="section-title">📈 Evaluation Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Sheets Processed</h4>
+                    <div class="value" id="totalSheets">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Average Score</h4>
+                    <div class="value" id="averageScore">0%</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Processing Accuracy</h4>
+                    <div class="value" id="accuracy">99.8%</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Time Saved</h4>
+                    <div class="value" id="timeSaved">0 hrs</div>
+                </div>
+            </div>
+            <div class="export-section">
+                <h3>Export Results</h3>
+                <button class="btn btn-export" type="button" onclick="exportResults('csv')">
+                    📄 Export as CSV
+                </button>
+                <button class="btn btn-export" type="button" onclick="exportResults('excel')">
+                    📊 Export as Excel
+                </button>
+                <button class="btn btn-export" type="button" onclick="exportResults('pdf')">
+                    📋 Generate Report
+                </button>
+            </div>
+        </section>
+    </div>
+    <script src="main.js" defer></script>
+</body>
+</html>
